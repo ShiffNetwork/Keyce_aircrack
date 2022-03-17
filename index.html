@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Wifi Air Crack</title>
+</head>
+
+<body>
+    <button id="getWifi">Search</button>
+    <select name="" id="wifi-selector"></select>
+    <button>Crack</button>
+    <script>
+        async function getWifi() {
+            const wifiSelector = document.querySelector("#wifi-selector");
+            const response = await fetch('http://localhost:3000/networks');
+            const wifiList = await response.json();
+            wifiList.forEach(({
+                address,
+                ssid
+            }) => {
+                wifiSelector.innerHTML += `<option id="${ssid}">${ssid} : ${address}</option>`
+                console.log(address, ssid);
+            });
+        }
+
+        let getWifiButton = document.querySelector("#getWifi")
+        getWifiButton.addEventListener("click", getWifi);
+    </script>
+
+</body>
+
+</html>
